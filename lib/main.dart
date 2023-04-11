@@ -1,62 +1,74 @@
-import 'package:agora_uikit/agora_uikit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_call_demo/homePage.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  final AgoraClient client = AgoraClient(
-    agoraConnectionData: AgoraConnectionData(
-      appId: "5a816acb5c3a4a7ebf81013e17e08b8f",
-      channelName: "d",
-      username: "user",
-    ),
-  );
-
-  @override
-  void initState() {
-    super.initState();
-    initAgora();
-  }
-
-  void initAgora() async {
-    await client.initialize();
-  }
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('2Way Audio-Video Communication'),
-          centerTitle: true,
-          backgroundColor: Colors.green,
-        ),
-        body: SafeArea(
-          child: Stack(
-            children: [
-              AgoraVideoViewer(
-                client: client,
-                layoutType: Layout.floating,
-                enableHostControls: true, // Add this to enable host controls
-              ),
-              AgoraVideoButtons(
-                client: client,
-                addScreenSharing: false, // Add this to enable screen sharing
-              ),
-            ],
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Column(
+      children: [
+        Align(
+          alignment: Alignment.center,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 60),
+            child: Container(
+              height: 600,
+              width: 900,
+              decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+              child: Padding(
+                  padding:
+                      const EdgeInsets.only(top: 200, left: 150, right: 150),
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                            hintText: 'Enter ID',
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.green))),
+                      ),
+                      SizedBox(height: 70),
+                      Container(
+                          height: 50,
+                          width: 180,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.green),
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context){
+                                    return MyAppName();
+                                }));
+                              },
+                              child: Text(
+                                'Join Call',
+                                style: TextStyle(fontSize: 26),
+                              )))
+                    ],
+                  )),
+            ),
           ),
         ),
-      ),
-      debugShowCheckedModeBanner: false,
-    );
+      ],
+    ));
   }
 }
