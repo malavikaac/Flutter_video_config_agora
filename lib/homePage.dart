@@ -13,10 +13,16 @@ class MyAppName extends StatefulWidget {
 class _MyAppState extends State<MyAppName> {
   final AgoraClient client = AgoraClient(
     agoraConnectionData: AgoraConnectionData(
-      appId: "5a816acb5c3a4a7ebf81013e17e08b8f",
-      channelName: "d",
+      appId: "947fb1de526d429b92bef85fbf6864b0",
+      channelName: "r",
       username: "user",
+      
+      tempToken: '007eJxTYNgha5D5zl837P+P/0Fn/Z39DEp7bk0yqK73+Pqkcbqk2EYFBgtTi0QLI7NUyyQTS5PUlCRLs2RLc/MUQwNjSyMj05SkRGerlIZARgaeH88ZGRkgEMRnZChiYAAA9OoeCA=='
     ),
+    agoraChannelData: AgoraChannelData(
+      isActiveSpeakerDisabled: false,
+      channelProfileType: ChannelProfileType.channelProfileLiveBroadcasting,
+    )
   );
 
   @override
@@ -28,6 +34,8 @@ class _MyAppState extends State<MyAppName> {
   void initAgora() async {
     await client.initialize();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,20 +49,46 @@ class _MyAppState extends State<MyAppName> {
         body: SafeArea(
           child: Stack(
             children: [
-              AgoraVideoViewer(
-                client: client,
-                layoutType: Layout.floating,
-                enableHostControls: true, // Add this to enable host controls
-              ),
+             
               AgoraVideoButtons(
                 client: client,
-                addScreenSharing: false,
+                addScreenSharing: true,
                 onDisconnect: () {
                   Navigator.push(context, MaterialPageRoute(builder: (Context){
                     return CallEnded();
                   }));
                 }, // Add this to enable screen sharing
               ),
+               Container(
+                width: 600,
+                height: 600,
+                 child: AgoraVideoViewer(
+                  client: client,
+                  layoutType: Layout.floating,
+                  enableHostControls: true, // Add this to enable host controls
+                             ),
+                             
+               ),
+              //  Align(
+              //   alignment: Alignment.center,
+              //    child: Container(
+              //     height:600,
+              //     width: 600,
+              //     color: Colors.amberAccent,
+              //    ),
+              //  ), 
+                  
+              //  Align(
+              //   alignment: Alignment.centerRight,
+              //    child: Container(
+              //     height: 500,
+              //     width: 500,
+              //     color: Color.fromARGB(255, 184, 182, 179),
+              //     child: Text('Chat'),
+              //    ),
+              //  )
+      
+      
             ],
           ),
         ),

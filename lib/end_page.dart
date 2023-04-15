@@ -10,7 +10,7 @@ class CallEnded extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 200, left: 500),
+            padding: const EdgeInsets.only(top: 190, left: 500),
             
             child: Container(
               height: 600,width: 800,
