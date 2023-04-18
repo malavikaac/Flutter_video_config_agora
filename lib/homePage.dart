@@ -1,5 +1,6 @@
 import 'package:agora_uikit/agora_uikit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_call_demo/chat/views/chatScreen.dart';
 import 'package:flutter_call_demo/end_page.dart';
 
 
@@ -20,10 +21,11 @@ class _MyAppState extends State<MyAppName> {
       screenSharingEnabled: true,
       
     ),
-    agoraChannelData: AgoraChannelData(
-      isActiveSpeakerDisabled: false,
-      channelProfileType: ChannelProfileType.channelProfileLiveBroadcasting,
-    )
+   enabledPermission: [
+    Permission.camera,
+    Permission.microphone,
+    Permission.calendar
+   ]
   );
 
   @override
@@ -82,9 +84,11 @@ class _MyAppState extends State<MyAppName> {
                Align(
                 alignment: Alignment.centerRight,
                  child: Container(
-                  height: 500,
-                  width: 500,
+                  height: 600,
+                  width: 600,
                   color: Color.fromARGB(255, 184, 182, 179),
+               //  builder : (_, child) => _unfocus(child:child!),
+                  child:  ChatScreen(),
                   
                  ),
                )
@@ -95,6 +99,21 @@ class _MyAppState extends State<MyAppName> {
         ),
       ),
       debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class _Unfocus extends StatelessWidget { 
+  const _Unfocus({required this.child,super.key});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child:child,
     );
   }
 }
