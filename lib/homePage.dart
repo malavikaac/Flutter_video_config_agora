@@ -13,16 +13,19 @@ class MyAppName extends StatefulWidget {
 class _MyAppState extends State<MyAppName> {
   final AgoraClient client = AgoraClient(
     agoraConnectionData: AgoraConnectionData(
-      appId: "947fb1de526d429b92bef85fbf6864b0",
-      channelName: "r",
+      appId: "76a53762ebf04b9399798e81da38179b",
+      channelName: "t",
       username: "user",
-      tempToken: '007eJxTYNgha5D5zl837P+P/0Fn/Z39DEp7bk0yqK73+Pqkcbqk2EYFBgtTi0QLI7NUyyQTS5PUlCRLs2RLc/MUQwNjSyMj05SkRGerlIZARgaeH88ZGRkgEMRnZChiYAAA9OoeCA==',
-      screenSharingEnabled: true,
-      
+      tempToken: '007eJxTYFj6P7Xy+UXDJzmsWZd3W2Zt/Br7+FCVX3GfrdmVknjrxXcUGFLNDJItLAyMTMwSzU2MjMwtEy0NkpONE00sjAySEo1NvIvtUhoCGRnswhKYGRkgEMRnZChhYAAAYU4eew==',
+      screenSharingEnabled: true,  
     ),
     agoraChannelData: AgoraChannelData(
       isActiveSpeakerDisabled: false,
       channelProfileType: ChannelProfileType.channelProfileLiveBroadcasting,
+    ),
+    agoraEventHandlers: AgoraRtcEventHandlers(
+
+      //onUserJoined: (int uid,int (connection, remoteUid, elapsed) => )
     )
   );
 
@@ -59,10 +62,22 @@ class _MyAppState extends State<MyAppName> {
                     return CallEnded();
                   }));
                 }, // Add this to enable screen sharing
+                extraButtons: [
+                 ElevatedButton( 
+           onPressed: () {},
+           child: Icon(Icons.chat_sharp, color: Colors.blueAccent), // icon of the button
+           style: ElevatedButton.styleFrom( // styling the button
+             shape: CircleBorder(),
+             padding: EdgeInsets.all(18),
+             backgroundColor: Colors.white, // Button color
+             foregroundColor: Colors.white, // Splash color
+           ),
+         ),
+                ],
               ),
                Container(
-                width: 600,
-                height: 600,
+                width: 300,
+                height: 300,
                  child: AgoraVideoViewer(
                   client: client,
                   layoutType: Layout.floating,
@@ -70,25 +85,6 @@ class _MyAppState extends State<MyAppName> {
                   // Add this to enable host controls
                              ),             
                ),
-               Align(
-                alignment: Alignment.center,
-                 child: Container(
-                  height:600,
-                  width: 600,
-                  color: Colors.amberAccent,
-                 ),
-               ), 
-                  
-               Align(
-                alignment: Alignment.centerRight,
-                 child: Container(
-                  height: 500,
-                  width: 500,
-                  color: Color.fromARGB(255, 184, 182, 179),
-                  
-                 ),
-               )
-      
       
             ],
           ),
@@ -98,3 +94,5 @@ class _MyAppState extends State<MyAppName> {
     );
   }
 }
+
+      
