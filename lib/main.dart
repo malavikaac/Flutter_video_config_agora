@@ -1,12 +1,12 @@
 import 'dart:async';
-
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-const appId = "5304d9ca50b44237a8a33ac5adbb56a2";
-const token = "007eJxTYAifqnxChUGN/+0tvstTDmfsenDtS+aXlWdnuFluzxLc/rdZgcHcPCk5KcXEINkoOcUk2dwsCUgnmaeYJhtbJiWbWBo8dDdMaQhkZFidEMvEyACBID4jQzkDAwB6yCBR";
-const channel = "w";
+const appId = "e60c880246a742279a90cc3a4820ba34";
+const token =
+    "007eJxTYNA4tiPZe2/13grrRSc8bYSufvkt/vIMj8fkzJtSNWfO6yQoMKSaGSRbWBgYmZglmpsYGZlbJloaJCcbJ5pYGBkkJRqbHGPfldIQyMhQVfGRkZEBAkF8RoYwBgYAGhoeqA==";
+const channel = "v";
 
 void main() => runApp(const MaterialApp(home: MyApp()));
 
@@ -53,14 +53,16 @@ class _MyAppState extends State<MyApp> {
             _remoteUid = remoteUid;
           });
         },
-        onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
+        onUserOffline: (RtcConnection connection, int remoteUid,
+            UserOfflineReasonType reason) {
           debugPrint("remote user $remoteUid left channel");
           setState(() {
             _remoteUid = null;
           });
         },
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
-          debugPrint('[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
+          debugPrint(
+              '[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
         },
       ),
     );
