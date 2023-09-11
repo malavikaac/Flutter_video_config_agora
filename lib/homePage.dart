@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_call_demo/chat/views/chatScreen.dart';
 import 'package:flutter_call_demo/end_page.dart';
 
-
 class MyAppName extends StatefulWidget {
   const MyAppName({Key? key}) : super(key: key);
 
@@ -13,20 +12,19 @@ class MyAppName extends StatefulWidget {
 
 class _MyAppState extends State<MyAppName> {
   final AgoraClient client = AgoraClient(
-    agoraConnectionData: AgoraConnectionData(
-      appId: "947fb1de526d429b92bef85fbf6864b0",
-      channelName: "r",
-      username: "user",
-      tempToken: '007eJxTYNgha5D5zl837P+P/0Fn/Z39DEp7bk0yqK73+Pqkcbqk2EYFBgtTi0QLI7NUyyQTS5PUlCRLs2RLc/MUQwNjSyMj05SkRGerlIZARgaeH88ZGRkgEMRnZChiYAAA9OoeCA==',
-      screenSharingEnabled: true,
-      
-    ),
-   enabledPermission: [
-    Permission.camera,
-    Permission.microphone,
-    Permission.calendar
-   ]
-  );
+      agoraConnectionData: AgoraConnectionData(
+        appId: "3659b9c2f7174bccb6a9d171edcb3d13",
+        channelName: "m",
+        username: "user",
+        tempToken:
+            '007eJxTYEi/sT9h8iFvKT8T/SmH4ng+vt1UdniXnVvdBhF2HSnHzxMUGIzNTC2TLJON0swNzU2SkpOTzBItUwzNDVNTkpOMUwyNQ+x2pTQEMjL4/ZdlYWSAQBCfkSGXgQEAwfMdeA==',
+        screenSharingEnabled: true,
+      ),
+      enabledPermission: [
+        Permission.camera,
+        Permission.microphone,
+        Permission.calendar
+      ]);
 
   @override
   void initState() {
@@ -37,8 +35,6 @@ class _MyAppState extends State<MyAppName> {
   void initAgora() async {
     await client.initialize();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -52,48 +48,26 @@ class _MyAppState extends State<MyAppName> {
         body: SafeArea(
           child: Stack(
             children: [
-             
               AgoraVideoButtons(
                 client: client,
                 addScreenSharing: true,
                 onDisconnect: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (Context){
+                  Navigator.push(context, MaterialPageRoute(builder: (Context) {
                     return CallEnded();
                   }));
                 }, // Add this to enable screen sharing
               ),
-               Container(
+              Container(
                 width: 600,
                 height: 600,
-                 child: AgoraVideoViewer(
+                child: AgoraVideoViewer(
                   client: client,
                   layoutType: Layout.floating,
-                  enableHostControls: true, 
+                  enableHostControls: true,
                   // Add this to enable host controls
-                             ),             
-               ),
-               Align(
-                alignment: Alignment.center,
-                 child: Container(
-                  height:600,
-                  width: 600,
-                  color: Colors.amberAccent,
-                 ),
-               ), 
-                  
-               Align(
-                alignment: Alignment.centerRight,
-                 child: Container(
-                  height: 600,
-                  width: 600,
-                  color: Color.fromARGB(255, 184, 182, 179),
-               //  builder : (_, child) => _unfocus(child:child!),
-                  child:  ChatScreen(),
-                  
-                 ),
-               )
-      
-      
+                ),
+              ),
+  
             ],
           ),
         ),
@@ -103,8 +77,8 @@ class _MyAppState extends State<MyAppName> {
   }
 }
 
-class _Unfocus extends StatelessWidget { 
-  const _Unfocus({required this.child,super.key});
+class _Unfocus extends StatelessWidget {
+  const _Unfocus({required this.child, super.key});
 
   final Widget child;
 
@@ -113,7 +87,7 @@ class _Unfocus extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child:child,
+      child: child,
     );
   }
 }
